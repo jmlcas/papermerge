@@ -1,0 +1,17 @@
+version: "3.3"
+
+services:
+
+  papermerge:
+    image: linuxserver/papermerge
+    container_name: papermerge
+    restart: unless-stopped    
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Madrid
+    volumes:
+      - ./pm/config:/config
+      - ./pm/data:/data
+    ports:
+      - "8200:8000"
