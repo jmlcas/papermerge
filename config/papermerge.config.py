@@ -1,7 +1,9 @@
 OCR_DEFAULT_LANGUAGE = "spa"
 
 OCR_LANGUAGES = {
-    "spa": "Español",
+    "spa": "Spanish",
     "eng": "English",
     "fra": "Français",
 }
+
+
