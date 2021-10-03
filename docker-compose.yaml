@@ -11,7 +11,7 @@ services:
       - PGID=1000
       - TZ=Europe/Madrid
     volumes:
-      - ./pm/config:/config
-      - ./pm/data:/data
+      - ./config:/config
+      - ./data:/data
     ports:
       - "8200:8000"
