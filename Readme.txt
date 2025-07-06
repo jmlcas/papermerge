@@ -1,5 +1,8 @@
-URL: http://localhost:8200
+# Papermerge
 
-nombre de usuario: admin
-contraseña: admin
+Ver en http://localhost:8200
+
+Nombre de usuario: admin
+
+Contraseña: admin
 
