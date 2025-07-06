@@ -1,24 +1,28 @@
 services:
 
   papermerge:
-    image: papermerge/papermerge:latest
-    container_name: papermerge
+    image: papermerge/papermerge:3.5.1
     environment:
-      - PAPERMERGE__MAIN__SECRET_KEY=abc
-      - DJANGO_SUPERUSER_PASSWORD=p4ssw0rd
-      - DJANGO_SUPERUSER_USERNAME=admin
-      - PAPERMERGE__DATABASE__TYPE=postgres
-      - PAPERMERGE__DATABASE__USER=postgres
-      - PAPERMERGE__DATABASE__PASSWORD=123
-      - PAPERMERGE__DATABASE__NAME=postgres
-      - PAPERMERGE__DATABASE__HOST=db
+      PAPERMERGE__SECURITY__SECRET_KEY: 12345
+      PAPERMERGE__AUTH__USERNAME: admin
+      PAPERMERGE__AUTH__PASSWORD: admin
+      PAPERMERGE__DATABASE__URL: postgresql://coco:jumbo@db:5432/pmgdb
     ports:
-      - "8200:8000"
+     - "8200:80"
     depends_on:
       - db
+      
   db:
-    image: bitnami/postgresql:latest
+    image: postgres:16.9
     volumes:
-      - ./postgres_data:/var/lib/postgresql/data/
+      - ./pgdata:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_PASSWORD=123
+      POSTGRES_PASSWORD: jumbo
+      POSTGRES_DB: pmgdb
+      POSTGRES_USER: coco
+    healthcheck:
+      test: pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB
+      interval: 5s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
